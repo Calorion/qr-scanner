@@ -232,6 +232,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             backing: .buffered,
             defer: false
         )
+        window.delegate = self
         window.title = "QR Code Detected"
         window.isReleasedWhenClosed = false
         window.backgroundColor = NSColor.windowBackgroundColor
@@ -332,12 +333,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func copyResultPayload(_ sender: NSButton) {
+        defer { sender.window?.close() }
         guard let textView = resultTextView(in: sender.window) else { return }
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(textView.string, forType: .string)
     }
 
     @objc private func openResultURL(_ sender: NSButton) {
+        defer { sender.window?.close() }
         guard let textView = resultTextView(in: sender.window),
               let url = URL(string: textView.string),
               ["http", "https"].contains(url.scheme?.lowercased() ?? "") else { return }
@@ -608,8 +611,7 @@ extension AppDelegate: NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
         guard let window = notification.object as? NSWindow else { return }
         
-        // If the QR code window is closing, clear the reference
-        if window.title == "Create QR Code" {
+        if self.qrCodeWindow === window {
             self.qrCodeWindow = nil
         }
     }
