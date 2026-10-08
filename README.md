@@ -4,7 +4,7 @@ A powerful, native macOS app that lets you scan QR codes directly from your scre
 
 ![QR Screen Scanner Demo](docs/images/app-demo.png)
 
-**[Visit the Website](https://andrewmkhoury.github.io/qr-scanner/) | [Download Latest Release](https://github.com/andrewmkhoury/qr-scanner/releases/latest)**
+**[Visit the Website](https://andrewmkhoury.github.io/qr-scanner/) | [Download Latest Release](https://github.com/Calorion/qr-scanner/releases/latest)**
 
 ## 🚀 Features
 
@@ -17,7 +17,7 @@ A powerful, native macOS app that lets you scan QR codes directly from your scre
 
 ## 📥 Installation
 
-1. [Download the latest release](https://github.com/andrewmkhoury/qr-scanner/releases/latest)
+1. [Download the latest release](https://github.com/Calorion/qr-scanner/releases/latest)
 2. Open the DMG file and drag the app to your Applications folder
 3. Open the app from your Applications folder
 4. The app will request screen recording permission which is required for scanning
