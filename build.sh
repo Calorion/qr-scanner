@@ -5,7 +5,7 @@
 
 # Set variables
 APP_NAME="QR Scanner"
-APP_VERSION="1.0.4"
+APP_VERSION="1.0.5"
 APP_BUILD="1"
 APP_BUNDLE_ID="com.andrewmkhoury.qrscreenscanner"
 APP_COPYRIGHT="Copyright © 2023 Andrew Khoury. All rights reserved."
@@ -77,6 +77,7 @@ chmod +x "${TEMP_APP}/Contents/MacOS/QRScreenScanner"
 echo "Copying resources..."
 cp "AppIcon.icns" "${TEMP_APP}/Contents/Resources/"
 cp "images/app-icon.png" "${TEMP_APP}/Contents/Resources/"
+cp -R "${ARM_BUILD_DIR}/QRScreenScanner_QRScreenScanner.bundle" "${TEMP_APP}/Contents/Resources/"
 
 # Copy Swift source files for reference
 echo "Copying Swift source files..."

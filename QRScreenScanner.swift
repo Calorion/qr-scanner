@@ -242,11 +242,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         contentView.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
 
         let iconView = NSImageView(frame: NSRect(x: (windowWidth - 78) / 2, y: 345, width: 78, height: 78))
-        let appIconURL = Bundle.module.url(
-            forResource: "app-icon",
-            withExtension: "png",
-            subdirectory: "Assets.xcassets/AppIcon.imageset"
-        )
+        let appIconURL = Bundle.main.url(forResource: "app-icon", withExtension: "png")
         iconView.image = appIconURL.flatMap(NSImage.init(contentsOf:))
             ?? NSImage(systemSymbolName: "qrcode", accessibilityDescription: "QR code")
         iconView.imageScaling = .scaleProportionallyUpOrDown
@@ -348,11 +344,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func resultTextView(in window: NSWindow?) -> NSTextView? {
-        guard let contentView = window?.contentView,
-              let scrollView = contentView.subviews.first(where: { $0 is NSScrollView }) as? NSScrollView else {
-            return nil
+        guard let contentView = window?.contentView else { return nil }
+        return findTextView(in: contentView)
+    }
+
+    private func findTextView(in view: NSView) -> NSTextView? {
+        if let textView = view as? NSTextView {
+            return textView
         }
-        return scrollView.documentView as? NSTextView
+
+        for subview in view.subviews {
+            if let textView = findTextView(in: subview) {
+                return textView
+            }
+        }
+
+        return nil
     }
     
     @objc func closeQRCodeWindow(_ sender: NSButton) {
